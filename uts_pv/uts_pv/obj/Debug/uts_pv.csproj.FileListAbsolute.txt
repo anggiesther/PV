@@ -1,0 +1,8 @@
+D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.csprojResolveAssemblyReference.cache
+D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.MainForm.resources
+D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.csproj.GenerateResource.Cache
+D:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.exe.config
+D:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.exe
+D:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.pdb
+D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.exe
+D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.pdb
