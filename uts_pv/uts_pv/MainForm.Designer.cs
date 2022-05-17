@@ -25,13 +25,15 @@ namespace uts_pv
 		private System.Windows.Forms.TextBox harga_jual;
 		private System.Windows.Forms.TextBox harga_beli;
 		private System.Windows.Forms.TextBox jumlah_barang;
-		private System.Windows.Forms.TextBox satuan_barang;
-		private System.Windows.Forms.Button simpan;
+		private System.Windows.Forms.ComboBox satuan_barang;
 		private System.Windows.Forms.Button update;
 		private System.Windows.Forms.Button insert;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Button delete;
+		private System.Windows.Forms.Button refresh;
+		private System.Windows.Forms.Label cari;
+		private System.Windows.Forms.TextBox formpencarian;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -65,13 +67,15 @@ namespace uts_pv
 			this.harga_jual = new System.Windows.Forms.TextBox();
 			this.harga_beli = new System.Windows.Forms.TextBox();
 			this.jumlah_barang = new System.Windows.Forms.TextBox();
-			this.satuan_barang = new System.Windows.Forms.TextBox();
-			this.simpan = new System.Windows.Forms.Button();
 			this.update = new System.Windows.Forms.Button();
 			this.insert = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.delete = new System.Windows.Forms.Button();
+			this.refresh = new System.Windows.Forms.Button();
+			this.cari = new System.Windows.Forms.Label();
+			this.formpencarian = new System.Windows.Forms.TextBox();
+			this.satuan_barang = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -127,57 +131,43 @@ namespace uts_pv
 			// 
 			this.kode_barang.Location = new System.Drawing.Point(167, 18);
 			this.kode_barang.Name = "kode_barang";
-			this.kode_barang.Size = new System.Drawing.Size(170, 26);
+			this.kode_barang.Size = new System.Drawing.Size(276, 26);
 			this.kode_barang.TabIndex = 6;
 			// 
 			// nama_barang
 			// 
 			this.nama_barang.Location = new System.Drawing.Point(167, 58);
 			this.nama_barang.Name = "nama_barang";
-			this.nama_barang.Size = new System.Drawing.Size(515, 26);
+			this.nama_barang.Size = new System.Drawing.Size(757, 26);
 			this.nama_barang.TabIndex = 7;
 			// 
 			// harga_jual
 			// 
 			this.harga_jual.Location = new System.Drawing.Point(167, 98);
 			this.harga_jual.Name = "harga_jual";
-			this.harga_jual.Size = new System.Drawing.Size(170, 26);
+			this.harga_jual.Size = new System.Drawing.Size(276, 26);
 			this.harga_jual.TabIndex = 8;
+			this.harga_jual.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Harga_jualKeyPress);
 			// 
 			// harga_beli
 			// 
 			this.harga_beli.Location = new System.Drawing.Point(167, 142);
 			this.harga_beli.Name = "harga_beli";
-			this.harga_beli.Size = new System.Drawing.Size(170, 26);
+			this.harga_beli.Size = new System.Drawing.Size(276, 26);
 			this.harga_beli.TabIndex = 9;
+			this.harga_beli.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Harga_beliKeyPress);
 			// 
 			// jumlah_barang
 			// 
 			this.jumlah_barang.Location = new System.Drawing.Point(167, 183);
 			this.jumlah_barang.Name = "jumlah_barang";
-			this.jumlah_barang.Size = new System.Drawing.Size(170, 26);
+			this.jumlah_barang.Size = new System.Drawing.Size(276, 26);
 			this.jumlah_barang.TabIndex = 10;
-			// 
-			// satuan_barang
-			// 
-			this.satuan_barang.Location = new System.Drawing.Point(167, 227);
-			this.satuan_barang.Name = "satuan_barang";
-			this.satuan_barang.Size = new System.Drawing.Size(170, 26);
-			this.satuan_barang.TabIndex = 11;
-			// 
-			// simpan
-			// 
-			this.simpan.Location = new System.Drawing.Point(409, 224);
-			this.simpan.Name = "simpan";
-			this.simpan.Size = new System.Drawing.Size(107, 38);
-			this.simpan.TabIndex = 12;
-			this.simpan.Text = "Simpan";
-			this.simpan.UseVisualStyleBackColor = true;
-			this.simpan.Click += new System.EventHandler(this.SimpanClick);
+			this.jumlah_barang.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Jumlah_barangKeyPress);
 			// 
 			// update
 			// 
-			this.update.Location = new System.Drawing.Point(522, 224);
+			this.update.Location = new System.Drawing.Point(615, 224);
 			this.update.Name = "update";
 			this.update.Size = new System.Drawing.Size(111, 38);
 			this.update.TabIndex = 13;
@@ -187,7 +177,7 @@ namespace uts_pv
 			// 
 			// insert
 			// 
-			this.insert.Location = new System.Drawing.Point(639, 224);
+			this.insert.Location = new System.Drawing.Point(732, 224);
 			this.insert.Name = "insert";
 			this.insert.Size = new System.Drawing.Size(110, 38);
 			this.insert.TabIndex = 14;
@@ -206,34 +196,71 @@ namespace uts_pv
 			// dataGridView1
 			// 
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Location = new System.Drawing.Point(3, 313);
+			this.dataGridView1.Location = new System.Drawing.Point(12, 313);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.RowTemplate.Height = 28;
-			this.dataGridView1.Size = new System.Drawing.Size(795, 335);
+			this.dataGridView1.Size = new System.Drawing.Size(946, 335);
 			this.dataGridView1.TabIndex = 16;
 			// 
 			// delete
 			// 
-			this.delete.Location = new System.Drawing.Point(522, 183);
+			this.delete.Location = new System.Drawing.Point(498, 224);
 			this.delete.Name = "delete";
-			this.delete.Size = new System.Drawing.Size(111, 35);
+			this.delete.Size = new System.Drawing.Size(111, 37);
 			this.delete.TabIndex = 17;
 			this.delete.Text = "Delete";
 			this.delete.UseVisualStyleBackColor = true;
 			this.delete.Click += new System.EventHandler(this.DeleteClick);
 			// 
+			// refresh
+			// 
+			this.refresh.Location = new System.Drawing.Point(848, 224);
+			this.refresh.Name = "refresh";
+			this.refresh.Size = new System.Drawing.Size(110, 37);
+			this.refresh.TabIndex = 18;
+			this.refresh.Text = "Refresh";
+			this.refresh.UseVisualStyleBackColor = true;
+			this.refresh.Click += new System.EventHandler(this.RefreshClick);
+			// 
+			// cari
+			// 
+			this.cari.Location = new System.Drawing.Point(498, 119);
+			this.cari.Name = "cari";
+			this.cari.Size = new System.Drawing.Size(260, 21);
+			this.cari.TabIndex = 19;
+			this.cari.Text = "Pencarian Kode/Nama Barang";
+			// 
+			// formpencarian
+			// 
+			this.formpencarian.Location = new System.Drawing.Point(498, 157);
+			this.formpencarian.Name = "formpencarian";
+			this.formpencarian.Size = new System.Drawing.Size(426, 26);
+			this.formpencarian.TabIndex = 20;
+			this.formpencarian.TextChanged += new System.EventHandler(this.FormpencarianTextChanged);
+			// 
+			// satuan_barang
+			// 
+			this.satuan_barang.FormattingEnabled = true;
+			this.satuan_barang.Location = new System.Drawing.Point(167, 226);
+			this.satuan_barang.Name = "satuan_barang";
+			this.satuan_barang.Size = new System.Drawing.Size(276, 28);
+			this.satuan_barang.TabIndex = 21;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 651);
+			this.BackColor = System.Drawing.Color.AliceBlue;
+			this.ClientSize = new System.Drawing.Size(968, 659);
+			this.Controls.Add(this.satuan_barang);
+			this.Controls.Add(this.formpencarian);
+			this.Controls.Add(this.cari);
+			this.Controls.Add(this.refresh);
 			this.Controls.Add(this.delete);
 			this.Controls.Add(this.dataGridView1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.insert);
 			this.Controls.Add(this.update);
-			this.Controls.Add(this.simpan);
-			this.Controls.Add(this.satuan_barang);
 			this.Controls.Add(this.jumlah_barang);
 			this.Controls.Add(this.harga_beli);
 			this.Controls.Add(this.harga_jual);
@@ -247,6 +274,7 @@ namespace uts_pv
 			this.Controls.Add(this.kode);
 			this.Name = "MainForm";
 			this.Text = "uts_pv";
+			this.Load += new System.EventHandler(this.MainFormLoad);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

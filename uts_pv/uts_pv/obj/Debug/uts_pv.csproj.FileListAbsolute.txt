@@ -6,3 +6,11 @@ D:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.exe
 D:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.pdb
 D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.exe
 D:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.pdb
+E:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.exe.config
+E:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.exe
+E:\SEMESTER 4\pv\uts_pv\uts_pv\bin\Debug\uts_pv.pdb
+E:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.csprojResolveAssemblyReference.cache
+E:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.MainForm.resources
+E:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.csproj.GenerateResource.Cache
+E:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.exe
+E:\SEMESTER 4\pv\uts_pv\uts_pv\obj\Debug\uts_pv.pdb

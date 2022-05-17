@@ -24,7 +24,7 @@ namespace uts_pv
 	public partial class MainForm : Form
 	{
 		
-		MySqlConnection co = new MySqlConnection("Server = Localhost; Database = uts_pv; Uid = root");
+		MySqlConnection co = new MySqlConnection("Server = Localhost; Database = utspv; Uid = root");
 		MySqlCommand mycommand = new MySqlCommand();
 		MySqlDataAdapter myadapter = new MySqlDataAdapter();
 		
@@ -34,6 +34,8 @@ namespace uts_pv
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
+			co.Open();
+			readdata();
 			
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
@@ -108,6 +110,35 @@ namespace uts_pv
 				}
 		}
 		
+		public void bersihkan(){
+			kode_barang.Text = "";
+			nama_barang.Text = "";
+			harga_beli.Text = "0";
+			harga_jual.Text = "0";
+			jumlah_barang.Text = "";
+			satuan_barang.Text = "";
+			formpencarian.Text = "";
+			readdata();
+		}
+		
+		public void finddata(){
+			try{
+				co.Open();
+				mycommand.Connection = co;
+				myadapter.SelectCommand = mycommand;
+				mycommand.CommandText = "select * from kasir1 where KodeBarang like '%"+formpencarian.Text+"%' or NamaBarang like '%"+formpencarian.Text+"%'";
+				DataSet ds = new DataSet();
+				if (myadapter.Fill(ds,"dftpesan") > 0){
+					dataGridView1.DataSource = ds;
+					dataGridView1.DataMember = "dftpesan";
+				}
+				co.Close();
+			}
+			catch (Exception ex){
+				MessageBox.Show(ex.ToString());
+			}
+		}
+		
 		void DataGridView1CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
 			kode_barang.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -118,21 +149,54 @@ namespace uts_pv
 			satuan_barang.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
 		}
 		
-		void SimpanClick(object sender, EventArgs e)
-		{
-			insertdata();
-		}
 		void UpdateClick(object sender, EventArgs e)
 		{
 			updatedata();
 		}
+		
 		void InsertClick(object sender, EventArgs e)
 		{
 			insertdata();
 		}
+		
 		void DeleteClick(object sender, EventArgs e)
 		{
 			deletedata();
+		}
+		
+		void RefreshClick(object sender, EventArgs e)
+		{
+			readdata();
+			bersihkan();
+		}
+		
+		void FormpencarianTextChanged(object sender, EventArgs e)
+		{
+			finddata();
+		}
+		
+		void Harga_beliKeyPress(object sender, KeyPressEventArgs e)
+		{
+			e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+		}
+		
+		void Harga_jualKeyPress(object sender, KeyPressEventArgs e)
+		{
+			e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+		}
+		
+		void Jumlah_barangKeyPress(object sender, KeyPressEventArgs e)
+		{
+			e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back;
+		}
+		
+		void MainFormLoad(object sender, EventArgs e)
+		{
+			satuan_barang.Items.Add("Unit");
+			satuan_barang.Items.Add("Pcs");
+			satuan_barang.Items.Add("Kg");
+			satuan_barang.Items.Add("gram");
+			satuan_barang.Items.Add("7000");
 		}
 	}
 }
