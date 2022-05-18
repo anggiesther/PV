@@ -27,6 +27,7 @@ namespace uts_pv
 		MySqlConnection co = new MySqlConnection("Server = Localhost; Database = utspv; Uid = root");
 		MySqlCommand mycommand = new MySqlCommand();
 		MySqlDataAdapter myadapter = new MySqlDataAdapter();
+		MySqlCommand cmd;
 		
 		public MainForm()
 		{
@@ -36,6 +37,7 @@ namespace uts_pv
 			InitializeComponent();
 			co.Open();
 			readdata();
+			bersihkan();
 			
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
@@ -119,6 +121,7 @@ namespace uts_pv
 			satuan_barang.Text = "";
 			formpencarian.Text = "";
 			readdata();
+			kodeotomatis();
 		}
 		
 		public void finddata(){
@@ -197,6 +200,40 @@ namespace uts_pv
 			satuan_barang.Items.Add("Kg");
 			satuan_barang.Items.Add("gram");
 			satuan_barang.Items.Add("7000");
+			
+			kodeotomatis();
+		}
+		
+		void kodeotomatis()
+		{
+			long hitung;
+			string urutan;
+			MySqlDataReader rd;
+			
+			try
+			{
+				co.Open();
+				cmd = new MySqlCommand("select KodeBarang from kasir1 where KodeBarang in(select max(KodeBarang) from kasir1) order by KodeBarang desc",co);
+				rd = cmd.ExecuteReader();
+				rd.Read();
+				if (rd.HasRows)
+				{
+					hitung = Convert.ToInt64(rd[0].ToString().Substring(rd["KodeBarang"].ToString().Length - 3, 3))+1;
+					string kodeurutan = "000" + hitung;
+					urutan = "BRG" + kodeurutan.Substring(kodeurutan.Length - 3, 3);
+				}
+				else
+				{
+					urutan = "BRG001";
+				}
+				rd.Close();
+				kode_barang.Text = urutan;
+				co.Close();
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
+			}
 		}
 	}
 }
