@@ -1,0 +1,8 @@
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\obj\Debug\Projek_PV.csprojResolveAssemblyReference.cache
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\obj\Debug\Projek_PV.MainForm.resources
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\obj\Debug\Projek_PV.csproj.GenerateResource.Cache
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\bin\Debug\Projek_PV.exe.config
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\bin\Debug\Projek_PV.exe
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\bin\Debug\Projek_PV.pdb
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\obj\Debug\Projek_PV.exe
+E:\SEMESTER 4\pv\Projek_PV\Projek_PV\obj\Debug\Projek_PV.pdb
